@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block title %}Profile page{% endblock title %}
+{% block content %}
+
+   
+<main class="flex mx-2 flex-col items-center	">
+    <h2>Update Your Profile</h2>
+    <form method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-success btn">Update Profile</button>
+    </form>
+</main>
+
+    
+{% endblock content %}

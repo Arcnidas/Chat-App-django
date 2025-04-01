@@ -1,0 +1,121 @@
+{% extends 'index_laptop.html' %}
+{% load static %}
+
+{% block title %}Home Page{% endblock title %}
+
+{% block content %}
+
+<!-- Main Layout -->    <!-- Main Content (65%) -->
+    <!-- Main Content (70%) -->
+        <main class="w-[70%] h-full border-r-2 border-gray-500 flex flex-col">
+            <div id="chatss" class="h-full flex flex-col"></div>
+            <div id="bubbleScreen" class="bubble-screen bg-primary-content shadow-2xl"></div>
+
+                    
+                <div id="Form_create_group" class="bg-base-100 shadow-2xl" >
+                    <h2>Create a Group</h2>
+                    <form onsubmit="createGroup(event)">
+                        <label for="group_name">Group Name:</label>
+                        <input type="text" id="group_name" name="group_name" required>
+                        <button type="submit">Create Group</button>
+                    </form>
+                </div>
+
+
+                    <div id="friendlist" class="p-7 border-2 border-gray-500 bg-primary-content shadow-2xl">
+
+                    </div>
+
+                    
+
+
+                    <div id="Send_friend_request" class="bg-primary-content shadow-2xl">
+                        <div>
+                            <!-- Your elements go here -->
+                                <div class="flex flex-col items-center">
+                                    <p class="align-middle">Wanna have some new friends ? Just enter their usernmame</p>
+                                    <form id="friend-request-form" class="flex flex-col items-center" >
+                                        <input type="text" name="receiver" placeholder="Enter username" required class="input input-bordered w-full max-w- mb-10">
+                                        <button type="submit" class="btn bg-fuchsia-500">Send Friend Request</button>
+                                    </form>
+                                    
+                                    <div id="response-message"> </div>
+                                </div>
+            
+            
+                                <div class="mt-24 flex  flex-col items-center overflow-auto ">
+                                    <p>Friends request received :</p>
+                                      <div id="friend-requests"></div>
+                                </div>
+                        </div>
+                    </div>
+        </main>
+    
+        <!-- Sidebar (30%) -->
+        <aside class="w-[30%] h-full flex flex-col items-center p-0">
+            <div class="navbar bg-base-100 navbar-end w-full flex justify-between" >
+
+
+                <button id="btn_switch">
+                    <img src="{% static 'img/svg/switch.svg' %}" alt="" class="w-6 h-6" >
+                </button>
+
+
+
+                <label for="my-drawer" class="btn btn-primary drawer-button">
+                    <img src="{% static 'img/svg/burger-menu.svg' %}" alt="Hamburger Menu" class="w-6 h-6">
+                  </label>
+                
+
+            </div>
+            
+
+
+            <div id="home-part">
+            
+                
+            </div>
+
+            <div id="group-part" class="hidden w-full">
+
+            </div>
+
+            
+
+            <div class="drawer drawer-end">
+                <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+                <div class="drawer-content">
+                  <!-- Page content here -->
+                  
+                </div>
+                <div class="drawer-side">
+                  <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+                  <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                    <!-- Sidebar content here -->
+                    <li>                
+                        <button class="close-btn" id="btn_create_group" >Create a group</button>
+                    </li>
+                    <li>
+                        <button id="btn_show_friendlist" >
+                            Show friendlist
+                        </button>
+                    </li>
+                    <li>
+                        <button id="btn_send_friend_request">
+                            Send friend Request
+                        </button>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+
+        </aside>
+    
+    <!-- Extra Section (5%) -->
+
+
+{% block apex %}{% endblock apex %}
+
+<script src="{% static 'js/index_laptop.js' %}"></script>
+
+{% endblock content %}

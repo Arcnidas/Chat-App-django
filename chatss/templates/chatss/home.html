@@ -1,0 +1,181 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+{% block content %}
+
+    
+
+    <header class="w-full" id="header">
+        <div class="navbar bg-gradient-to-bl from-fuchsia-500 to-cyan-500  flex justify-around lg:hidden">
+            
+            
+            
+                <p class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold">
+                    Arcnidas
+                </p>
+
+                <div class="relative inline-block text-left">
+                    <!-- Dropdown Button -->
+                    <div class="relative">
+                        <button type="button" onclick="toggleDropdown()" class="" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                            <img src="{% static 'img/svg/ellipsis-vertical.svg' %}" alt="Menu" class="w-6 h-6 sm:w-8 sm:h-8">
+                        </button>
+                    
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown-menu" class="fixed top-12 right-4 z-50 w-32 rounded-md bg-base-200 ring-1 shadow-lg ring-black/5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                            <div class="py-1 flex flex-col gap-4" role="none">
+                                
+                                <p>
+                                    <a href="profile-info/{{user.username}}" class=" w-full text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm 2xl:text-sm px-4 py-2 text-white">Profile</a>
+                                </p>
+
+                                <button id="nav-friend" class="w-full">
+                                    <p class="text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm 2xl:text-sm text-white text-left px-4 py-2">Friend list</p>
+                                </button>
+
+                                <a href="{% url 'logout' %}" class="" role="menuitem" tabindex="-1" id="menu-item-1" onclick="hideDropdown()">
+                                    <p class="text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm 2xl:text-sm  text-white text-left px-4 py-2">Logout</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            
+
+            
+              
+
+
+
+
+
+
+        </div>
+        
+    </header>
+
+    <main class="h-5/6">
+        
+
+            <div id="home-part"  class=" flex flex-col items-center p-0">
+
+                
+
+                
+                <div id="burgerdropdown">
+
+                    
+
+                </div>
+                
+                
+
+                
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+            <div id="friends-part">
+                
+                
+                <div id="Cfriend-list" class="mx-2 hidden"> 
+
+                    <div class="navbar bg-base-100">
+                        <div class="flex-none">
+                          <button class="btn bg-cyan-500" id="nav-friendlist">
+                            <img src="{% static 'img/svg/left-arrow.svg' %}" alt="Three Dots" class="w-4 h-4 ">
+                          </button>
+                        </div>
+                        <div class="flex-1 flex justify-center">
+                          <a class="btn btn-ghost text-xl">Arcnidas</a>
+                        </div>
+                        <div class="flex-none">
+
+
+                            <button id="bubbleButton" class="">
+
+                                <img src="{% static 'img/svg/add-friend.svg' %}" alt="Menu" class="w-6 h-6 sm:w-8 sm:h-8">
+
+                            </button>
+
+                            <div id="bubbleScreen" class="bubble-screen bg-primary-content shadow-2xl">
+                                <div class="bubble-content">
+                                    <!-- Your elements go here -->
+                                        <div class="flex flex-col items-center">
+                                            <p class="align-middle">Wanna have some new friends ? Just enter their usernmame</p>
+                                            <form id="friend-request-form" class="flex flex-col items-center" >
+                                                <input type="text" name="receiver" placeholder="Enter username" required class="input input-bordered w-full max-w- mb-10">
+                                                <button type="submit" class="btn bg-fuchsia-500">Send Friend Request</button>
+                                            </form>
+                                            
+                                            <div id="response-message"> </div>
+                                        </div>
+                    
+                    
+                                        <div class="mt-24 flex  flex-col items-center overflow-auto ">
+                                            <p>Friends request received :</p>
+                                              <div id="friend-requests"></div>
+                                        </div>
+                                </div>
+                            </div>
+
+                          
+                        </div>
+                      </div>
+
+
+
+
+
+
+                    <div id="friendlist">
+
+                    </div>
+                    
+
+
+
+
+                </div>
+
+                
+
+
+                        
+
+
+
+            </div>
+
+
+
+
+
+
+            {% block apex %}
+                
+            {% endblock apex %}
+            
+            
+          
+          
+    </main>
+
+
+
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    
+{% endblock content %}

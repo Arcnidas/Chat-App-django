@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Profile details{% endblock title %}
+{% block content %}
+    
+    <header>
+
+        <div class="flex mx-2 justify-around my-5">
+            <button class="btn btn-neutral">
+                <a href="{%url 'home'%}"> Home</a>
+            </button>
+
+            <button class="btn btn-neutral">
+                <a href="{%url 'Update_Profile'%}">Wanna update your profile?</a>
+            </button>
+        </div>
+        
+    </header>
+    <main>
+
+        <div class="m-8">
+
+
+            <div class="flex justify-center">
+                {% if profile.profile_picture %}
+                    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="rounded-full">
+                {% else %}
+                    <img src="{% static  'img/base_profile.png'%}" class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 2xl:w-72 2xl:h-72 rounded-lg  rounded-full" >
+                {% endif %}
+            </div>
+
+
+            <div class="flex justify-center">
+                <h1>{{ profile.user.username }}'s Profile</h1>
+                
+            </div>
+        
+            {% if profile.bio %}
+                <h1>{{ profile.bio}}</h1>
+            {% else %}
+                <p>You dont have a bio wanna add one ?</p>
+            {% endif %}
+        
+            <div class="flex justify-between">
+                <h1> Age: {{profile.user.age}}</h1>
+                
+                {% if profile.user.gender == 'M' %}
+                    <p>Gender: male.</p>
+                {% elif profile.user.gender == 'F' %}
+                    <p>Gender: female.</p>
+                {% else %}
+                    <p>Gender not specified.</p>
+                {% endif %}
+        
+            </div>
+            <h2>Group in common:</h2>
+    
+    
+        </div>
+
+
+
+
+
+
+    </main>
+
+
+
+    <footer></footer>
+{% endblock content %}

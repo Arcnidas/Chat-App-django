@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Chat page{% endblock title %}
+
+{% block content %}
+
+        
+    
+<div class="flex flex-col h-screen">
+    <!-- Header Section -->
+    <header class="w-full p-4 sm:p-6 shadow-md flex flex-col gap-2">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'home' %}" class="btn bg-cyan-500">
+                <img src="{% static 'img/svg/left-arrow.svg' %}" alt="Three Dots" class="w-4 h-4">
+            </a>
+        
+            <a href="{% url 'Profile_details' person.username %}" class="flex items-center justify-around space-x-2">
+                <div class="avatar">
+                    <div class="rounded-full w-12 h-12 sm:w-16 sm:h-16">
+                        <img src="{{person.profile.profile_picture.url}}" alt="Profile Picture" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl rounded-full">
+                    </div>
+                </div>
+
+                <p class="text-sm sm:text-md">{{person.username}}</p>
+
+                
+            </a>
+        </div>
+        <div>
+            <p class="text-xs sm:text-sm text-center">Online: {{ person.last_online|date:"M j, Y, g:i a" }}</p>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main id="messages-area" class="flex-1 overflow-y-auto p-4 sm:p-6">
+        {% for message in messages %}
+            {% if message.message.from_who == me %}
+                <section class="chat chat-end mb-4">
+                    <div class="chat-header flex justify-between items-center mb-1">
+                        <p class="text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm 2xl:text-sm">{{message.formatted_timestamp}}</p>
+                        {% if message.message.has_been_seen %}
+                            <div class="status seen flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            </div>
+                        {% else %}
+                            <div class="status flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="chat-bubble chat-bubble-secondary text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl">{{message.message.message}}</div>
+                </section>
+            {% elif message.message.from_who == person %}
+                <section class="chat chat-start mb-4">
+                    <div class="chat-header flex justify-between items-center mb-1">
+                        <p class="text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm 2xl:text-sm">{{message.formatted_timestamp}}</p>
+                    </div>
+                    <div class="chat-bubble chat-bubble-primary text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-xl">{{message.message.message}}</div>
+                </section>
+            {% endif %}
+        {% endfor %}
+        <div id="person-data" data-person-id="{{ person.id }}"></div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="p-4 shadow-md">
+        <div class="container mx-auto flex flex-row items-end space-x-2 space-x">
+            <textarea 
+                name="text" 
+                class="flex-1 textarea textarea-bordered resize-none min-h-[40px] max-h-[150px]"
+                oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
+                id="the-message-to-send">
+            </textarea>
+            <button id="send-message-button" class="btn btn-primary sm:w-auto">Send</button>
+        </div>
+    </footer>
+    
+</div>
+
+<script src="{% static 'js/chat_per.js' %}"></script>
+
+{% endblock content %}

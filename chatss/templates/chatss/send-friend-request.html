@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block title %}Home page{% endblock title %}
+{% block content %}
+
+   
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send friend request</button>
+</form>
+
+
+
+     
+{% endblock content %}
